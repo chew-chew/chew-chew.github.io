@@ -1,0 +1,192 @@
+*{
+	box-sizing: border-box;
+	padding: 0;
+	margin:0;
+  color:#000000;
+    
+	}
+html,body{
+	 font-family: 'Noto Sans TC', sans-serif;
+   background-color: #ffffff;
+    
+}
+.title h1{
+  color:#5d99c6;
+}
+.title p{
+ letter-spacing: 13px;
+}
+
+/*BANNER-SLIDER-START*/
+   .swiper-container {
+      width: 100%;
+      height: 20vh;
+      overflow: hidden;
+    }
+    .banner01{
+      background-image: url("../img/banner01.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+
+    }
+    .banner02{
+      background-image: url("../img/banner02.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+    .banner03{
+      background-image: url("../img/banner03.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+    .banner04{
+      background-image: url("../img/banner09.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+    .banner05{
+      background-image: url("../img/banner15.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+/*BANNER-SLIDER-END*/
+	
+	.navbar{
+		background-color: #5d99c6;
+
+		color:#6e6840;
+    font-size: 16px;
+		
+	}
+	nav li{
+		padding: 0px 10px;
+	}
+  
+ /**CARD**/
+ .hidden{
+   overflow: hidden;
+ }
+.over_hidden{
+  overflow: hidden;
+  width: 100%;
+  height: 200px;
+}
+.album01{
+      background-image: url("../img/banner04.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+.album02{
+      background-image: url("../img/banner05.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+.album03{
+      background-image: url("../img/banner06.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+.album04{
+      background-image: url("../img/banner07.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+.album05{
+      background-image: url("../img/banner08.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+.album06{
+      background-image: url("../img/banner10.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+.album07{
+      background-image: url("../img/banner11.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+.album08{
+      background-image: url("../img/banner12.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+.album09{
+      background-image: url("../img/banner13.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+.album10{
+      background-image: url("../img/banner14.jpg");
+      background-position: center;
+      -webkit-background-size: cover;
+      background-size: cover;
+}
+footer{
+	background-color: #90caf9;
+	color:#ffffff; 
+  overflow: hidden;
+}
+footer .logo{
+  height: 300px;
+  width: 300px;
+	border-radius: 300px;
+	overflow: hidden;
+	
+}
+.logo {
+	background-image: url("../img/logo.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.fb{
+	background-color: #5d99c6;
+}
+.ig{
+	background-color: #c3fdff;
+}
+.tw{
+	background-color: #ffffff;
+}
+.yt{
+	background-color: #90caf9;
+}
+
+/**a**/
+.paragraph01_pic{
+  position: relative;
+}
+.paragraph01_pic img{
+  position: absolute;
+  left:-20%;
+}
+#Flat{
+  
+   animation-name: run;
+  animation-duration: 0.4s;
+  animation-iteration-count:infinite;
+
+}
+@keyframes run {
+  from   {
+     transform: rotateY(180deg);
+  }
+  to {
+     transform: rotateY(0deg);
+  }
+ 
+}
