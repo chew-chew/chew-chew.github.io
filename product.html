@@ -81,15 +81,7 @@
    margin-top: 60vh;
    position: relative;
  }
- marquee{
-   font-size: 100px;
-   color: #e3736f;
-    -webkit-text-fill-color: transparent;
-    -moz-text-stroke-width: 1px;
-    -webkit-text-stroke-width: 1px;
-    -moz-text-stroke-color: #e3736f;
-    -webkit-text-stroke-color: #e3736f;
- }
+ 
  .inTaiwan{
    position:absolute;
    top:30%;
@@ -247,7 +239,7 @@ main .content {
   color: #fff;
   font-size: 16px;
   text-transform: uppercase;
-  background: #491c00;
+  background: #BA9162;
   cursor: pointer;
 }
 
@@ -279,7 +271,7 @@ table td:last-child {
   padding-right: 25px;
 }
 table thead {
-  color: #491c00;
+  color: #BA9162;
   font-size: 16px;
   text-align: left;
 }
@@ -328,7 +320,7 @@ table tfoot .total-price {
   color: #fff;
   font-size: 18px;
   text-align: center;
-  background-color: #491c00;
+  background-color: #BA9162;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
@@ -341,7 +333,7 @@ table tfoot .total-price {
   bottom: 0;
   z-index: 10;
   padding: 30px 20px 0;
-  color: #491c00;
+  color: #BA9162;
   font-size: 20px;
   text-align: center;
   background: rgba(255, 255, 255, 0.8);
@@ -352,7 +344,7 @@ table tfoot .total-price {
 .icon-container .circle,
 .icon-container .check {
   fill: none;
-  stroke: #491c00;
+  stroke: #BA9162;
   stroke-width: 3;
 }
 .icon-container .check {
@@ -467,13 +459,41 @@ table tfoot .total-price {
         <main >
              <!-- 購物清單 -->
              <div class="row">
+              
                 <table class="col-12">
+                  
                     <thead>
                         <tr>
                             <th colspan="5">Order</th>
                         </tr>
                     </thead>
                     <tbody>
+                      
+                      
+                      <div class="form-group col-md-6 col-12">
+                        <label for="pwd">姓名:</label>
+                        <input type="text" class="form-control" id="name">
+                      </div>
+                      <div class="form-group col-md-6 col-12">
+                        <label for="pwd">電話:</label>
+                        <input type="number" class="form-control" id="phone">
+                      </div>
+                      <div class="form-group col-md-6 col-12">
+                      <select name="payment" class="select form-control" id="pay">
+                        <option style="display:none" value="">請選付款方式</option>
+                        <option value="面交">面交</option>
+                        <option value="匯款">匯款</option>
+                        <option value="轉數快">轉數快</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6 col-12">
+                      <select name="shipping" class="select form-control" id="ship">
+                        <option style="display:none" value="">請選擇運送方式</option>
+                        <option value="面交">面交</option>
+                        <option value="順豐">順豐</option>
+                        <option value="智能櫃">智能櫃</option>
+                      </select>
+                    </div>
                         <tr class="table-title">
                             <td>品項</td>
                             <td>數量</td>
@@ -481,25 +501,29 @@ table tfoot .total-price {
                             <td>小計</td>
                             <td></td>
                         </tr>
-                        <tr v-for="product in productsInCart">
-                            <td>{{ product.name }}</td>
-                            <td>{{ product.amount }}</td>
+                        <tr v-for="product in productsInCart" class="shopcart">
+                            <td class="p-name">{{ product.name }}</td>
+                            <td class="p-num">{{ product.amount }}</td>
                             <td>{{ product.price }}</td>
                             <td>{{ product.sum }}</td>
+                            <hr>
                             <td>
                                 <button class="button-del" @click="remove(product)">×</button>
                             </td>
                         </tr>
+                     
                     </tbody>
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td colspan="3">Total <span class="total-price">$ {{ total }}</span></td>
+                            <td colspan="3">Total <span class="total-price">HKD$ {{ total }}</span></td>
                             <td></td>
                         </tr>
                     </tfoot>
+                 
                 </table>
-                <button class="checkout" type="submit" formtarget="_self">前往付款</button>
+                <button class="checkout" type="button" id="sendOrder">送出訂單</button>
+              
             </div>
             <!-- 瀏覽產品 -->
             <div class="content row">
@@ -651,11 +675,111 @@ table tfoot .total-price {
       });
     },
 
-    // 木前購買的金額
+    // 購買的金額
     total() {
       return this.productsInCart.
       reduce((sum, p) => sum + p.sum, 0);
     } } });
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+      $(function(){
+          // 監聽 送出訂單 按鈕點擊
+          // 下面這段主要在組合資料，還有擋使用者不填資料不能送出
+          $('#sendOrder').click(function(e){
+          var status = true;
+          // 姓名
+          var name = $('#name').val();
+          // 電話
+          var phone = $('#phone').val(); 
+          // 付款
+          var pay = $('#pay').val(); 
+          // 運送
+          var ship = $('#ship').val(); 
+          // 訂單  後面再加上選項數量*價格
+          var order = '';
+          // 價格 先預設0 後面再加上
+          var price = 0;
+          $('input').focus(function(){
+            $(this).css('border','');
+          });
+           // 處理價格 跟 訂單 資料
+       
+           $('.shopcart').each(function(index) {
+          if($('this > .total-price').text() !== 'HKD$ 0'){
+            order += $('this > .p-name').text() + ' - ' + $('this > .p-num').val() + '盒 \n';
+            price = $('this > .total-price').text();
+          }
+        });
+        order = order.substring(0, order.length - 1);
+        
+         
+  
+          // 擋住不填資料邏輯
+          if(name == ''){
+            $('#name').css('border','1px solid #ff0000');
+            alert('請提供訂購人姓名');
+            status = false;
+          }
+          if(phone == ''){
+            $('#phone').css('border','1px solid #ff0000');
+            alert('請提供訂購人電話');
+            status = false;
+          }
+          
+          if(pay == '請選付款方式'){
+            $('#pay').css('border','1px solid #ff0000');
+            status = false;
+          }
+          if(ship == '請選運送方式'){
+            $('#ship').css('border','1px solid #ff0000');
+            status = false;
+          }
+          if(order == ''){
+            alert('請選擇訂購品項喔');
+            status = false;
+          }
+          // 如果 �必填欄位都過了 才會到這邊
+          if(status){
+            // 增加日期資料
+            var currentdate = new Date();
+            var filltime = currentdate.getFullYear() + "/"
+                  + (currentdate.getMonth() + 1) + "/"
+                  + currentdate.getDate() + "  "
+                  + currentdate.getHours() + ":"
+                  + currentdate.getMinutes() + ":"
+                  + currentdate.getSeconds();
+            // 打包 要的資料
+           
+            $.ajax({
+          // 這邊用get type
+          type: "get",
+          // api url - google appscript 產出的 url
+          url: "https://script.google.com/macros/s/AKfycbysyztNZ2wH93pcM9xlY8NwF88C6-0ynC_E57BScJ9CwytGdOzAzzSe/exec",
+          // 剛剛整理好的資料帶入
+          data:  {
+              'name' : name,
+              'phone':phone,
+              'time': filltime,
+              'order': order,
+              'price':price,
+              'pay': pay,
+              'ship': ship,
+            },
+          // 資料格式是JSON 
+          dataType: "JSON",
+          // 成功送出 會回頭觸發下面這塊感謝
+          success: function (response) {
+            console.log(response);
+            alert('感謝您的訂購！！');
+          }
+        });
+            // 呼叫 send ajax function
+           
+          }
+        });
+      });
+      
     </script>
 </body>
 </html>
