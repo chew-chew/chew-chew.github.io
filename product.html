@@ -458,7 +458,7 @@ table tfoot .total-price {
         <!-- 主要展示區塊 -->
         <main >
              <!-- 購物清單 -->
-             <div class="row">
+             <div class="row myform">
               
                 <table class="col-12">
                   
@@ -505,7 +505,7 @@ table tfoot .total-price {
                             <td class="p-name">{{ product.name }}</td>
                             <td class="p-num">{{ product.amount }}</td>
                             <td>{{ product.price }}</td>
-                            <td>{{ product.sum }}</td>
+                            <td >{{ product.sum }}</td>
                             <hr>
                             <td>
                                 <button class="button-del" @click="remove(product)">×</button>
@@ -571,7 +571,7 @@ table tfoot .total-price {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script type="text/javascript">
-   new Vue({
+    new Vue({
   el: "#app",
   data: {
     isShowingCart: false,
@@ -680,13 +680,15 @@ table tfoot .total-price {
       return this.productsInCart.
       reduce((sum, p) => sum + p.sum, 0);
     } } });
+
     </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script>
+    <script type="text/javascript">
+     
       $(function(){
           // 監聽 送出訂單 按鈕點擊
           // 下面這段主要在組合資料，還有擋使用者不填資料不能送出
-          $('#sendOrder').click(function(e){
+          $('#sendOrder').on('click touch', function(e){
           var status = true;
           // 姓名
           var name = $('#name').val();
@@ -705,13 +707,16 @@ table tfoot .total-price {
           });
            // 處理價格 跟 訂單 資料
        
-           $('.shopcart').each(function(index) {
-          if($('this > .total-price').text() !== 'HKD$ 0'){
-            order += $('this > .p-name').text() + ' - ' + $('this > .p-num').val() + '盒 \n';
-            price = $('this > .total-price').text();
+          if($('.total-price').text() !== 'HKD$ 0'){
+            var p_count = $('.p-name').length;
+            for(i=0;p_count>i;i++){
+              order += $('.p-name:eq(0+i)').text() + ' - ' + $('.p-num:eq(0+i)').text() + '盒 \n';
+            }
+            
+            price += $('.total-price').text();
           }
-        });
-        order = order.substring(0, order.length - 1);
+       
+       
         
          
   
@@ -727,11 +732,11 @@ table tfoot .total-price {
             status = false;
           }
           
-          if(pay == '請選付款方式'){
+          if(pay == ''){
             $('#pay').css('border','1px solid #ff0000');
             status = false;
           }
-          if(ship == '請選運送方式'){
+          if(ship == ''){
             $('#ship').css('border','1px solid #ff0000');
             status = false;
           }
@@ -750,22 +755,29 @@ table tfoot .total-price {
                   + currentdate.getMinutes() + ":"
                   + currentdate.getSeconds();
             // 打包 要的資料
+            var data = {
+            'name' : name,
+            'phone': phone,
+            'time': filltime,
+            'order': order,
+            'price': price,
+            'pay': pay,
+            'ship':ship,
+          }
+          // 呼叫 send ajax function
+          send(data);
            
+        }
+      });
+    });
+    function send(data){
             $.ajax({
           // 這邊用get type
           type: "get",
           // api url - google appscript 產出的 url
           url: "https://script.google.com/macros/s/AKfycbysyztNZ2wH93pcM9xlY8NwF88C6-0ynC_E57BScJ9CwytGdOzAzzSe/exec",
           // 剛剛整理好的資料帶入
-          data:  {
-              'name' : name,
-              'phone':phone,
-              'time': filltime,
-              'order': order,
-              'price':price,
-              'pay': pay,
-              'ship': ship,
-            },
+          data: data,
           // 資料格式是JSON 
           dataType: "JSON",
           // 成功送出 會回頭觸發下面這塊感謝
@@ -774,11 +786,11 @@ table tfoot .total-price {
             alert('感謝您的訂購！！');
           }
         });
+      }
             // 呼叫 send ajax function
            
-          }
-        });
-      });
+          
+      
       
     </script>
 </body>
