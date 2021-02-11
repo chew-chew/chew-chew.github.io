@@ -522,7 +522,7 @@ table tfoot .total-price {
                     </tfoot>
                  
                 </table>
-                <button class="checkout" type="button" id="sendOrder">送出訂單</button>
+                <a class="checkout" type="button" id="sendOrder">送出訂單</a>
               
             </div>
             <!-- 瀏覽產品 -->
@@ -688,7 +688,8 @@ table tfoot .total-price {
       $(function(){
           // 監聽 送出訂單 按鈕點擊
           // 下面這段主要在組合資料，還有擋使用者不填資料不能送出
-          $('.myform').on('click' , '#sendOrder', function(e){
+          $('#sendOrder').css('cursor','pointer');
+          $('.myform').on('click touch' , '#sendOrder', function(e){
           var status = true;
           // 姓名
           var name = $('#name').val();
