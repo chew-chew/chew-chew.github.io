@@ -688,7 +688,7 @@ table tfoot .total-price {
       $(function(){
           // 監聽 送出訂單 按鈕點擊
           // 下面這段主要在組合資料，還有擋使用者不填資料不能送出
-          $('#sendOrder').on('click touch', function(e){
+          $('.myform').on('click' , '#sendOrder', function(e){
           var status = true;
           // 姓名
           var name = $('#name').val();
@@ -708,14 +708,14 @@ table tfoot .total-price {
            // 處理價格 跟 訂單 資料
        
           if($('.total-price').text() !== 'HKD$ 0'){
-            var p_count = $('.p-name').length;
-            for(i=0;p_count>i;i++){
-              order += $('.p-name:eq(0+i)').text() + ' - ' + $('.p-num:eq(0+i)').text() + '盒 \n';
+            var p_count = $('.shopcart').length;
+            for(i=0;i < p_count;i++){
+              order += $('.p-name').eq(i).text() + ' - ' + $('.p-num').eq(i).text() + '盒 \n';
             }
             
             price += $('.total-price').text();
           }
-       
+         
        
         
          
