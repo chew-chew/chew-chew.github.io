@@ -690,7 +690,7 @@ table tfoot .total-price {
           // 下面這段主要在組合資料，還有擋使用者不填資料不能送出
           $('#sendOrder').css('cursor','pointer');
           const sendorder = document.querySelector("#sendOrder");
-          sendorder.addEventListener("click", function(e) {
+          sendorder.addEventListener("click ", function(e) {
           
           var status = true;
           // 姓名
@@ -766,7 +766,7 @@ table tfoot .total-price {
             'price': price,
             'pay': pay,
             'ship':ship,
-          }
+          };
           // 呼叫 send ajax function
           send(data);
            
