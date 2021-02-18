@@ -144,14 +144,14 @@ footer{
 footer .logo{
   height: 300px;
   width: 300px;
-	border-radius: 300px;
-	overflow: hidden;
+	
+	
 	
 }
 .logo {
-	background-image: url("../img/logo.jpg");
-  background-position: center;
-  background-size: cover;
+	background-image: url("../img/mylogo.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .fb{
 	background-color: #5d99c6;
