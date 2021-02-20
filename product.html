@@ -393,12 +393,18 @@ table tfoot .total-price {
     stroke-dashoffset: 0;
   }
 }
+.bg-my{
+  background-color: #BA9162;
+}
 </style>
 
 </head>
 <body >
 
- <header class="blog-header py-3 px-3">
+  <header class="blog-header  "> 
+    <div class="bg-my text-center text-white">
+      <p class="text-center text-white">滿$350免費速遞</p>
+    </div>
     <div class="row flex-nowrap justify-content-between align-items-end">
       <div class="col-4 pt-1">
         
@@ -417,7 +423,7 @@ table tfoot .total-price {
   </header>
     
       
-   <nav class="navbar navbar-expand-lg navbar-light">
+   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -534,7 +540,8 @@ table tfoot .total-price {
                         <div>
                             <h2>{{ product.name }}</h2>
                             <p>{{ product.price }}</p>
-                            <a :href=" product.info">more info +</a>
+                            
+                                  <a href="" id="{{product.info}}">more info+</a>
                         </div>
                     </div>
                     <div class="action-box">
