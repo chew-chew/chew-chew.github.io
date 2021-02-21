@@ -465,7 +465,7 @@ table tfoot .total-price {
         <!-- 主要展示區塊 -->
         <main >
              <!-- 購物清單 -->
-             <div class="row myform">
+             <FORM class="row myform contact-form" @submit.prevent="sendEmail">
               
                 <table class="col-12">
                   
@@ -479,26 +479,30 @@ table tfoot .total-price {
                       
                       <div class="form-group col-md-6 col-12">
                         <label for="pwd">姓名:</label>
-                        <input type="text" class="form-control" id="name" maxlength="10" required>
+                        <input type="text" class="form-control" id="name" maxlength="10" name="user_name" required>
                       </div>
                       <div class="form-group col-md-6 col-12">
                         <label for="pwd">電話:</label>
-                        <input type="number" class="form-control" id="phone" required min="8">
+                        <input type="number" class="form-control" id="phone" required min="8" name="user_phone">
+                      </div>
+                      <div class="form-group col-12">
+                        <label for="pwd">EMAIL:</label>
+                        <input type="email" class="form-control" id="email" name="user_email" required >
                       </div>
                       <div class="form-group col-md-6 col-12">
                       <select name="payment" class="select form-control" id="pay">
                         <option style="display:none" value="">請選付款方式</option>
-                        <option value="面交">面交</option>
-                        <option value="匯款">匯款</option>
+                        <option value="面交">面交(太子)</option>
+                        <option value="匯款">銀行過數</option>
                         <option value="轉數快">轉數快</option>
                       </select>
                     </div>
                     <div class="form-group col-md-6 col-12">
                       <select name="shipping" class="select form-control" id="ship">
                         <option style="display:none" value="">請選擇運送方式</option>
-                        <option value="面交">面交</option>
-                        <option value="順豐">順豐</option>
-                        <option value="智能櫃">智能櫃</option>
+                        <option value="面交">面交(太子)</option>
+                        <option value="順豐">順豐(到付，滿350免運)</option>
+                        <option value="智能櫃">智能櫃(+30HKD，滿350免運)</option>
                       </select>
                     </div>
                         <tr class="table-title">
@@ -523,15 +527,15 @@ table tfoot .total-price {
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td colspan="3">Total <span class="total-price">HKD$ {{ total }}</span></td>
+                            <td colspan="3" name="message">Total <span class="total-price">HKD$ {{ total }}</span></td>
                             <td></td>
                         </tr>
                     </tfoot>
                  
                 </table>
-                <button class="checkout" type="button" id="sendOrder" onclick="myFunction()">送出訂單</button>
+                <button class="checkout" type="button" id="sendOrder" onclick="myFunction()" value="Send">送出訂單</button>
               
-            </div>
+              </FORM>
             <!-- 瀏覽產品 -->
             <div class="content row">
                 <!-- 範例 HTML -->
@@ -860,5 +864,27 @@ table tfoot .total-price {
       
       
     </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script type="text/javascript">
+    (function() {
+    emailjs.init("user_0RXM5JNOcRU7s2Ty6nFrA");
+    })();
+    </script>
+    <script>
+      import emailjs from 'emailjs-com';
+      
+      export default {
+        methods: {
+          sendEmail: (e) => {
+            emailjs.sendForm('gmail', 'template_tgrbfy7', e.target, 'user_0RXM5JNOcRU7s2Ty6nFrA')
+              .then((result) => {
+                  console.log('SUCCESS!', result.status, result.text);
+              }, (error) => {
+                  console.log('FAILED...', error);
+              });
+          }
+        }
+      }
+      </script>
 </body>
 </html>
