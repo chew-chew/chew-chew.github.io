@@ -412,7 +412,7 @@ table tfoot .total-price {
       </div>
       <div class="col-4 text-center">
        <div>
-        <a class="blog-header-logo text-dark text-center" href="index.html"><img width="80" height="80" class="align-top" src="img/BITE.svg" alt=""><br>CHEWCHEW SHOP</a></div> 
+        <a class="blog-header-logo text-dark text-center" href="index.html"><img width="80" height="80" class="align-top" src="img/BITE.svg" alt=""><br>CHEWCHEW SHOP<br>台灣代購</a></div> 
       </div>
       <div class="col-4 d-flex justify-content-end align-items-end">
         <a class="link-secondary " href="#" aria-label="Search">
@@ -465,7 +465,7 @@ table tfoot .total-price {
         <!-- 主要展示區塊 -->
         <main >
              <!-- 購物清單 -->
-             <FORM class="row myform contact-form" @submit.prevent="sendEmail">
+             <FORM class="row myform contact-form" >
               
                 <table class="col-12">
                   
@@ -533,7 +533,7 @@ table tfoot .total-price {
                     </tfoot>
                  
                 </table>
-                <button class="checkout" type="button" id="sendOrder" onclick="myFunction()" value="Send">送出訂單</button>
+                <button class="checkout" type="button" id="sendOrder" onclick="myFunction()" value="Send" type=submit>送出訂單</button>
               
               </FORM>
             <!-- 瀏覽產品 -->
@@ -769,6 +769,7 @@ table tfoot .total-price {
           var pay = $('#pay').val(); 
           // 運送
           var ship = $('#ship').val(); 
+          var email = $('#email').val(); 
           // 訂單  後面再加上選項數量*價格
           var order = '';
           // 價格 先預設0 後面再加上
@@ -834,6 +835,7 @@ table tfoot .total-price {
             'price': price,
             'pay': pay,
             'ship':ship,
+            'email':email,
           };
           // 呼叫 send ajax function
           send(data);
@@ -864,27 +866,6 @@ table tfoot .total-price {
       
       
     </script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-    <script type="text/javascript">
-    (function() {
-    emailjs.init("user_0RXM5JNOcRU7s2Ty6nFrA");
-    })();
-    </script>
-    <script>
-      import emailjs from 'emailjs-com';
-      
-      export default {
-        methods: {
-          sendEmail: (e) => {
-            emailjs.sendForm('gmail', 'template_tgrbfy7', e.target, 'user_0RXM5JNOcRU7s2Ty6nFrA')
-              .then((result) => {
-                  console.log('SUCCESS!', result.status, result.text);
-              }, (error) => {
-                  console.log('FAILED...', error);
-              });
-          }
-        }
-      }
-      </script>
+   
 </body>
 </html>
