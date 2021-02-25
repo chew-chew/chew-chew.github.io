@@ -30,10 +30,18 @@
 
 
 <style>
+  *{
+   
+    margin: 0PX;
+    padding: 0PX;
+    box-sizing: border-box;
+  }
   body{
     letter-spacing: 0.08em;
+    
+    
   }
-	.container-fulid{
+	.main-bg{
 	background-image:url('img/double-bubble-outline.png');
  
   
@@ -61,11 +69,12 @@
     -webkit-text-stroke-width: 1px;
     -moz-text-stroke-color: #e3736f;
     -webkit-text-stroke-color: #e3736f;
+    width: 100%;
  }
  .inTaiwan{
-   position:absolute;
+  position:absolute;
    top:20%;
-   left: calc(calc(100% - 1200px) / 2);
+   left: calc(calc(100vw - 1200px) / 2);
   
    color:#5C7159;
  }
@@ -88,20 +97,20 @@
  }
 
 @media (min-width: 576px) and (max-width: 767.98px) { 
-  .inTaiwan{left: calc(calc(100% - 576px) / 2);
+  .inTaiwan{left: calc(calc(100vw - 576px) / 2);
   }
  
 }
 
 
 @media (min-width: 768px) and (max-width: 991.98px) { 
-  .inTaiwan{left: calc(calc(100% - 768px) / 2);
+  .inTaiwan{left: calc(calc(100vw - 768px) / 2);
   }
   
  }
  @media (min-width: 992px) and (max-width: 1199.98px) { 
   .inTaiwan{
-    left: calc(calc(100% - 992px) / 2);
+    left: calc(calc(100vw - 992px) / 2);
     
   }
   
@@ -231,23 +240,18 @@
 </head>
 <body >
 
-  <header class="blog-header  "> 
+  <header class="blog-header  container-fulid"> 
     <div class="bg-my text-center text-white">
       <p class="text-center text-white">滿$350免費速遞</p>
     </div>
-    <div class="row flex-nowrap justify-content-between align-items-end">
-      <div class="col-4 pt-1">
-        
-      </div>
-      <div class="col-4 text-center">
+    <div class="row text-center" style="width: 100%;">
+     
+      <div class="col-4 offset-4 text-center pl-5">
        <div>
         <a class="blog-header-logo text-dark text-center" href="index.html"><img width="80" height="80" class="align-top" src="img/BITE.svg" alt=""><br>CHEWCHEW SHOP<br>台灣代購</a>
       </div> 
       </div>
-      <div class="col-4 d-flex justify-content-end align-items-end">
-       
-       
-      </div>
+      
     </div>
   </header>
   <ul class="nav justify-content-center border-bottom border-top">
@@ -266,7 +270,7 @@
    
   
  <!--NAV ENDDING-->
-<div class="container-fulid">
+<div class="container-fulid main-bg">
   <div class="taiwan">
     <div class="rotating-text">
       <marquee direction="right" height="110" scrollamount="5" behavior="alternate">
